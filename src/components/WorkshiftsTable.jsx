@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
-import ManageUser, { isAuthenticated } from "../userManagement.js";
-import { getEmployees, getWorkshfts } from "../JanDeKapper";
-import { Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
 const columns = [
@@ -13,7 +9,6 @@ const columns = [
 ];
 
 export function WorkshiftsTable() {
-    const { user } = ManageUser();
     const [shifts, setShifts] = useState([]);
     const [employees, setEmployees] = useState([]);
     const [pageSize, setPageSize] = useState(10);
@@ -24,28 +19,6 @@ export function WorkshiftsTable() {
           sort: 'asc',
         },
       ]);
-
-    useEffect(() => {
-        // Add shifts
-        getWorkshfts(user?.token).then((shifts) => {
-            setLoading(false)
-            if (shifts) setShifts(Array.from(shifts));
-        });
-
-        // Add employees
-        getEmployees().then((employees) => {
-            let emplyMap = {};
-
-            for (let employee of employees)
-                emplyMap[employee.employee_id] = employee;
-
-            setEmployees(emplyMap);
-        });
-
-        return () => {
-            setLoading(true)
-          }
-    }, [user?.token]);
 
     const rows = shifts.map((shift, index) => {
         let employeeName =
@@ -64,12 +37,11 @@ export function WorkshiftsTable() {
         };
     });
 
-    return isAuthenticated(
+    return (
         <div className="bg-white">
             <DataGrid
                 rows={rows}
                 columns={columns}
-                pageSize={10}
                 rowsPerPageOptions={[5, 10]}
                 disableSelectionOnClick
                 autoHeight

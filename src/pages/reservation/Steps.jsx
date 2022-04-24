@@ -9,7 +9,7 @@ import { CombinedSection } from "./sections/ChooseBarberDate";
 import { FillInformation } from "./sections/FillInformation";
 import { ConfirmReservation } from "./sections/ConfirmReservation";
 import { ChooseTreatment } from "./sections/ChooseTreatment";
-import { getEmployees } from "../../JanDeKapper";
+
 
 function parseJson(value) {
     try {
@@ -59,28 +59,11 @@ export function Steps() {
         getValue("fstep", state.step)
     );
 
-    const handleChange = (panel) => (event, isExpanded) => {
-        setExpanded(isExpanded ? panel : false);
-    };
-
     useEffect(() => {
         if (state.step > furthestStep) {
             setFurthestStep(state.step);
-            sessionStorage.setItem("fstep", JSON.stringify(state.step));
         }
     }, [state.step]);
-
-    useEffect(() => {
-        getEmployees().then((employees) => {
-            let emplyMap = {};
-
-            for (let employee of employees) {
-                emplyMap[employee.employee_id] = employee;
-            }
-
-            setEmployees(emplyMap);
-        });
-    }, []);
 
     function getTimeFromMs(ms) {
         return new Date(ms).toLocaleTimeString([], {
@@ -163,7 +146,6 @@ export function Steps() {
                                         furthestStep > index
                                     ) {
                                         setState({ ...state, step: index });
-                                        sessionStorage.setItem("step", index);
                                     }
                                 }
                             }}

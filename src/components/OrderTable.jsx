@@ -6,25 +6,15 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import ManageUser, { isAuthenticated } from "../userManagement.js";
 import { TablePagination } from "@mui/material";
 import {stableSort, getComparator} from './TableFunctions'
-import { getOrders } from "../JanDeKapper";
 
 export function OrderTable () {
-    const { user } = ManageUser();
     const [orders, setOrders] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [sort, setSort] = useState("asc");
     const [sortBy, setSortBy] = useState("");
-
-
-    useEffect(() => {
-        getOrders(user?.token).then((orders) => {
-            if (orders) setOrders(Array.from(orders));
-        });
-    }, [user?.token]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -34,7 +24,7 @@ export function OrderTable () {
         setPage(0);
     };
 
-    return isAuthenticated(
+    return (
         <div className="bg-white">
             <TableContainer>
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">

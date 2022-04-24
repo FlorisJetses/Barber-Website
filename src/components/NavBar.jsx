@@ -36,11 +36,13 @@ export const NavBar = () => {
         >
             <List>
                 <ListItem>
-                    <img
-                        src={logo}
-                        alt="logo van Jan de Kapper"
-                        className="w-32 h-auto m-3"
-                    />
+                    <Link to="/">
+                        <img
+                            src={logo}
+                            alt="logo van Jan de Kapper"
+                            className="w-32 h-auto m-3"
+                        />
+                    </Link>
                 </ListItem>
                 <ListItem>
                     <Button href="/#over_ons">Over ons</Button>

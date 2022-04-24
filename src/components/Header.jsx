@@ -1,6 +1,4 @@
 import React from "react";
-
-import { isAuthenticated } from "../userManagement";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -94,7 +92,7 @@ export function Header(props) {
     setOpen(!open);
   };
 
-  return isAuthenticated(
+  return (
     <ThemeProvider theme={(mdTheme, theme)}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />

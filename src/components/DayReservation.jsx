@@ -1,7 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { getReservationsByDay } from "../JanDeKapper";
-import ManageUser from "../userManagement";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -10,10 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
-import { Tooltip } from "@mui/material";
 import { IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { getEmployees } from "../JanDeKapper";
 import { stableSort, getComparator } from "./TableFunctions";
 import { TablePagination } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -25,8 +20,6 @@ function Row({
     startDate,
     endDate,
     reservation,
-    user,
-    forceUpdate,
     employeeName,
 }) {
     const [open, setOpen] = useState(false);
@@ -110,32 +103,6 @@ export const DayReservation = ({ dateValue }) => {
         setV(v + 1);
     };
 
-    useEffect(() => {
-        
-            getReservationsByDay(user?.token, dateValue).then(
-                (dayReservations) => {
-                    if (dayReservations) {
-                        setDayReservations(Array.from(dayReservations));
-                        if (dayReservations.length > 0) {
-                            setCheck(true);
-                        } else {
-                            setCheck(false);
-                        }
-                    }
-                }
-            );
-
-            getEmployees().then((employees) => {
-                let emplyMap = {};
-
-                for (let employee of employees)
-                    emplyMap[employee.employee_id] = employee;
-
-                setEmployees(emplyMap);
-            });
-        
-        
-    }, [isLoaded, user?.token, dateValue, v]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);

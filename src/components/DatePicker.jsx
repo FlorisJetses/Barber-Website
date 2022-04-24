@@ -3,21 +3,13 @@ import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
-import { getOccupiedDates } from '../JanDeKapper';
-import { useEffect } from 'react';
 import { useState } from 'react';
-import ManageUser from '../userManagement';
+
 
 
 
 export default function BasicDatePicker({dateValue, setValue}) {
-  const { user } = ManageUser();
   const [occupiedDates, setDates] = useState([])
-
- useEffect(() => {
-  getOccupiedDates(user?.token).then((result) => setDates(Array.from(result)))
- }, [user?.token])
-
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>

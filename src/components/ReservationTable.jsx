@@ -6,12 +6,6 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import {
-    getReservations,
-    deleteReservation,
-    getEmployees,
-} from "../JanDeKapper";
-import ManageUser, { isAuthenticated } from "../userManagement.js";
 import { TablePagination } from "@mui/material";
 import { stableSort, getComparator } from "./TableFunctions";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -74,12 +68,6 @@ function Row({
                 <TableCell>
                     <Tooltip
                         title="Delete"
-                        onClick={() =>
-                            deleteReservation(
-                                { id: reservation.reservation_id },
-                                user.token
-                            ).then(() => forceUpdate())
-                        }
                     >
                         <IconButton>
                             <DeleteIcon />
@@ -138,7 +126,6 @@ function Row({
 export const ReservationTable = () => {
     const [employees, setEmployees] = useState([]);
     const [reservations, setReservations] = useState([]);
-    const { user } = ManageUser();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [v, setV] = useState(0);
@@ -148,31 +135,6 @@ export const ReservationTable = () => {
     const forceUpdate = () => {
         setV(v + 1);
     };
-
-    useEffect(() => {
-        let Mounted = true;
-
-        if (Mounted) {
-            // Add reservations
-            getReservations(user?.token).then((reservations) => {
-                if (reservations) setReservations(Array.from(reservations));
-            });
-
-            // Add employees
-            getEmployees().then((employees) => {
-                let emplyMap = {};
-
-                for (let employee of employees)
-                    emplyMap[employee.employee_id] = employee;
-
-                setEmployees(emplyMap);
-            });
-        }
-
-        return () => {
-            Mounted = false;
-        };
-    }, [user?.token, v]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -234,7 +196,7 @@ export const ReservationTable = () => {
                                         startDate={startDate}
                                         endDate={endDate}
                                         reservation={reservation}
-                                        user={user}
+                                       
                                         forceUpdate={forceUpdate}
                                         employeeName={employeeName}
                                         className=" border-b hover:bg-gray-100"
