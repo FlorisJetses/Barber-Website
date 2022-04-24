@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    html, body {
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+    }
+    .bar1,
+    .bar2,
+    .bar3 {
+        @apply w-9 h-1.5 bg-gray-400 my-1.5 rounded;
+    }
+
+    .change .bar1 {
+        transform: rotate(-45deg) translate(-8px, 8px);
+    }
+
+    .change .bar2 {
+        @apply opacity-0;
+    }
+
+    .change .bar3 {
+        transform: rotate(45deg) translate(-8px, -8px);
+    }
+    .menu {
+        @apply m-3 inline-block cursor-pointer z-50  absolute top-1 left-2;
+    }
+    .table-header {
+        @apply text-gray-400 text-left;
+    }
+  
+    .sidebar-wrapper {
+        @apply flex flex-row items-center mx-2 my-3 md:my-5;
+    }
+    .reservation-section {
+        @apply border p-5 flex flex-col items-center;
+    }
+    .reservation-header {
+        @apply flex flex-row cursor-pointer sm:self-start;
+    }
+    .reservation-body {
+        @apply transition-all duration-500 m-5;
+    }
+    .reservation-treatment-options {
+        @apply m-3;
+    }
+    .add-reservation-card {
+        @apply fixed bg-white w-96 h-96 shadow rounded p-3 border-yellow-500;
+    }
+    #message-holder {
+        @apply fixed bottom-1 right-1 z-50;
+    }
+    #card-holder {
+        @apply flex flex-wrap w-full h-0;
+    }
+    .message {
+        @apply rounded-xl pl-2 pr-2 mt-2 mb-2;
+    }
+    .line {
+        @apply inline-block w-7 h-0.5 bg-orange-500 rounded-full 
+    }
+    .scissor{
+        @apply w-8 h-auto inline text-orange-500
+    }
+}
+
+@keyframes fade-in {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0.9);
+        opacity: 0;
+        height: 0;
+        margin: 0;
+    }
+}
