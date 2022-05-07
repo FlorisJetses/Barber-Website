@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import ManageUser from "../../userManagement";
-import { isAuthenticated } from "../../userManagement";
 import { DataGrid } from "@mui/x-data-grid";
 import { Tooltip } from "@mui/material";
 import { IconButton } from "@mui/material";
@@ -54,12 +53,11 @@ function TransactionsBody() {
         };
     });
 
-    return isAuthenticated(
+    return(
         <div className="m-5 bg-white">
             <DataGrid
                 rows={rows}
                 columns={columns}
-                pageSize={10}
                 rowsPerPageOptions={[5, 10]}
                 disableSelectionOnClick
                 autoHeight

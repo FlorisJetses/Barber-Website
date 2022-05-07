@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import ManageUser from "../../userManagement";
-import { isAuthenticated } from "../../userManagement";
 import { addProduct, getProducts } from "../../JanDeKapper";
 import { DataGrid } from "@mui/x-data-grid";
 import { Tooltip } from "@mui/material";
@@ -54,10 +53,6 @@ function ProductsBody() {
     const [pageSize, setPageSize] = useState(10);
     const [loading, setLoading] = useState(true);
 
-    const forceUpdate = () => {
-        setV(v + 1);
-    };
-
     useEffect(() => {
         getProducts(user?.token).then((products) => {
           setLoading(false)
@@ -83,12 +78,11 @@ function ProductsBody() {
         };
     });
 
-    return isAuthenticated(
+    return(
         <div className="m-5 bg-white flex flex-col">
             <DataGrid
                 rows={rows}
                 columns={columns}
-                pageSize={10}
                 rowsPerPageOptions={[5, 10]}
                 disableSelectionOnClick
                 autoHeight

@@ -1,8 +1,8 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { addReservation, getEmployees, showMessage } from "../../../JanDeKapper";
 import { Button } from "@mui/material";
-import { UserContext } from "../Steps";
-import { Navigate, useNavigate } from "react-router-dom";
+import {useReservation} from "../../../store/ReservationContext"
+import { useNavigate } from "react-router-dom";
 
 
 function msToDate(ms) {
@@ -55,7 +55,7 @@ function getReservationBody(timeframe, email, employee_id, treatments, name, pho
 
 export const ConfirmReservation = () => {
     const [employees, setEmployees] = useState([]);
-    const {state, setState} = useContext(UserContext)
+    const {state} = useReservation()
     let navigate = useNavigate();
 
     useEffect(() => {

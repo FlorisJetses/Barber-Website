@@ -2,11 +2,12 @@ import React from "react";
 import { ChooseBarber } from "./ChooseBarber";
 import { ChooseDate } from "./ChooseDate";
 import { Button } from "@mui/material";
-import { UserContext } from "../Steps";
+import {useReservation} from "../../../store/ReservationContext"
+
 import { useContext, useState } from "react";
 
 export const CombinedSection = () => {
-    const {incrementStep, state }= useContext(UserContext)
+    const {incrementStep, state }= useReservation()
     const [required, setRequired] = useState(false)
 
     return (

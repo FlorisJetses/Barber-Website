@@ -1,40 +1,18 @@
-import React, { useEffect, useState } from "react";
-import ManageUser, { isAuthenticated } from "../../userManagement.js";
+import React, { useState } from "react";
 import { Header } from "../../components/Header";
 import { ReservationTable } from "../../components/ReservationTable.jsx";
-import { AddItemCard } from "./ItemCards.jsx";
 import BasicTabs from "../../components/Tabs.jsx";
 import BasicDatePicker from "../../components/DatePicker.jsx";
 import { DayReservation } from "../../components/DayReservation.jsx";
-import { addReservation, getEmployees } from "../../JanDeKapper";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-
-const getEmployeeOptions = (employees) => {
-    let list = [];
-
-    for (let employee of employees)
-        list.push([
-            employee.first_name + " " + employee.last_name,
-            employee.employee_id,
-        ]);
-
-    return list;
-};
+import {employees} from "../../employees"
 
 const ReservationsBody = () => {
-    const { user } = ManageUser();
     const [dateValue, setDateValue] = useState(null);
     const [todayDate] = useState(() => Date.now());
-    const [employees, setEmployees] = useState([]);
 
-    useEffect(() => {
-        getEmployees().then((employees) => {
-            if (employees) setEmployees(Array.from(employees));
-        });
-    }, [user?.token]);
-
-    return isAuthenticated(
+    return(
         <div className=" m-5 flex flex-col">
             <BasicTabs
                 title1="Vandaag"
@@ -58,22 +36,6 @@ const ReservationsBody = () => {
                 sx={{alignSelf: "flex-end"}}
                 color="primary"
                 aria-label="add"
-                onClick={() =>
-                    AddItemCard(
-                        [
-                            ["Email", "email_address", "email"],
-                            [
-                                "Medewerker",
-                                "employee_id",
-                                getEmployeeOptions(employees),
-                            ],
-                            ["Starttijd", "start", "datetime-local"],
-                            ["Eindtijd", "end", "datetime-local"],
-                        ],
-                        addReservation,
-                        user
-                    )
-                }
             >
                 <AddIcon />
             </Fab>

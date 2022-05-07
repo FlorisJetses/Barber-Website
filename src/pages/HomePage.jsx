@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { NavBar } from "../components/NavBar.jsx";
 import { Footer } from "../components/Footer.jsx";
 import { Link } from "react-router-dom";
-import { getTreatments } from "../JanDeKapper.js";
 import { Button } from "@mui/material";
 import Background from "../img/Side.jpg";
 import Side2 from "../img/Side2.jpg";
@@ -13,19 +12,17 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import scissor from "../img/scissor.svg";
 import scissors from "../img/scissors.svg";
-import { getEmployees } from "../JanDeKapper.js";
 import Barber1 from "../img/Barber1.jpg"
 import Barber2 from "../img/Barber2.jpg"
 import Barber3 from "../img/Barber3.jpg"
+import { treatments } from "../treatments.js";
 
 
 export function HomePage() {
-    const [treatments, setTreatments] = useState([]);
+
     const [employees, setEmployees] = useState([]);
 
     useEffect(() => {
-        getTreatments().then((result) => setTreatments(Array.from(result)));
-
         getEmployees().then((employees) => {
             let emplyMap = {};
 
@@ -35,8 +32,6 @@ export function HomePage() {
             setEmployees(emplyMap);
         });
     }, []);
-
-    const items = [1, 2, 3];
 
     return (
         <div

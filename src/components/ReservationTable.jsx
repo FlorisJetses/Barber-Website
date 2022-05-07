@@ -145,7 +145,7 @@ export const ReservationTable = () => {
     };
 
 
-    return isAuthenticated(
+    return(
         <div className="bg-white">
             <TableContainer>
                 <Table sx={{ minWidth: 650 }} size="small" aria-label=" table">

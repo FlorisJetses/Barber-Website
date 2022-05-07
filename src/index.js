@@ -8,7 +8,6 @@ import { Reservations } from './pages/dashboard/Reservations';
 import { Workshifts } from './pages/dashboard/Workshifts';
 import { Customers } from './pages/dashboard/Customers';
 import { HomePage } from './pages/HomePage';
-import { Contact } from './pages/Contact';
 import { Reservation } from './pages/reservation/Reservation';
 import { Settings} from './pages/dashboard/Settings'
 import { Editor } from './pages/dashboard/Editor'
@@ -33,7 +32,6 @@ function Page() {
                     <Route path="/dashboard/editor" element={<Editor />} />
                     <Route path="/dashboard/producten" element={<Products />} />
                     <Route path="/dashboard/transacties" element={<Transactions />} />
-                    <Route path="/contact" element={<Contact />} />
                 </Routes>
             </Router>
         </div>

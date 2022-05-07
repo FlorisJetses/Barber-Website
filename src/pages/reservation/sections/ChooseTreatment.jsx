@@ -1,16 +1,11 @@
-import { useEffect, useState, useContext } from "react";
-import { getTreatments } from "../../../JanDeKapper";
+import { useState } from "react";
 import { Checkbox } from "@mui/material";
 import { Button } from "@mui/material";
-import { UserContext } from "../Steps";
+import {useReservation} from "../../../store/ReservationContext"
+import { treatments } from "../../../treatments";
 
 function getTreatmentElements() {
-    const { state, setState } = useContext(UserContext);
-    const [treatments_db, setTreatments] = useState([]);
-
-    useEffect(() => {
-        getTreatments().then((result) => setTreatments(Array.from(result)));
-    }, []);
+    const { state, setState } = useReservation();
 
     const removeTreatment = (treatment) => {
         let treats = state.treatments;
@@ -42,7 +37,7 @@ function getTreatmentElements() {
         }
     };
 
-    return treatments_db.map((treatment) => {
+    return treatments.map((treatment) => {
         return (
             <div key={treatment.title} className="cursor-pointer">
                 <Checkbox
@@ -75,7 +70,7 @@ function getTreatmentElements() {
 
 export const ChooseTreatment = () => {
     const [required, setRequired] = useState(false);
-    const { state, incrementStep } = useContext(UserContext);
+    const { state, incrementStep } = useReservation()
 
     const handleSubmit = (event) => {
         event.preventDefault();

@@ -5,7 +5,6 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { UpcomingReservations } from "../../components/UpcomingReservations";
-import { StoreOccupation } from "../../components/StoreOccupation";
 
 function DashboardContent() {
     return (
@@ -45,7 +44,7 @@ function DashboardContent() {
                                 flexDirection: "column",
                                 height: "maxHeight",
                             }}>
-                            <StoreOccupation />
+
                         </Paper>
                     </Grid>
                 </Grid>

@@ -1,5 +1,4 @@
-import { useEffect, useState, useContext } from "react";
-import { findTimeframes, getAvailableDates } from "../../../JanDeKapper";
+import { useEffect, useState} from "react";
 import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -9,9 +8,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { UserContext } from "../Steps";
-
-
+import {useReservation} from "../../../store/ReservationContext"
 
 function getMsFromDate(date) {
   return new Date(date).getTime();
@@ -24,48 +21,12 @@ function getTimeFromMs(ms) {
   });
 }
 
-function getTimeElements(timeframes, employee_id) {
-  const {state, setState} = useContext(UserContext)
-
-  const saveTimeframe = (timeframe) => {
-    sessionStorage.setItem("timeframe", JSON.stringify(timeframe));
-    setState({...state, timeframe: timeframe});
-  };
-
-  return timeframes.map((timeframe) => {
-    if (employee_id !== -1 && employee_id) {
-      if (employee_id !== timeframe.employee_id) {
-        return <></>;
-      }
-    }
-    return (
-      <Button
-        value={JSON.stringify(timeframe)}
-        key={JSON.stringify(timeframe)}
-        variant="outlined"
-        onClick={() => {
-          saveTimeframe(timeframe);
-        }}
-      >
-        {getTimeFromMs(timeframe.ms)}
-      </Button>
-    );
-  });
-}
 
 function SelectTimeElements(timeframes) {
-  const {state, setState} = useContext(UserContext)
-  const [frame, setFrame] = useState("")
-
-  useEffect(() => {
-    setFrame("")
-    
-  }, [timeframes])
+  const {state, setState} = useReservation()
   
   const saveTimeframe = (timeframe) => {
-    sessionStorage.setItem("timeframe", JSON.stringify(timeframe));
     setState({...state, timeframe: timeframe});
-    console.log(state.timeframe)
   };
 
   return (
@@ -112,23 +73,9 @@ function getTimeframeBody(date, employee_id) {
 export const ChooseDate = () => {
   const [timeframes, setTimeframes] = useState([]);
   const [availableDates, setAvailableDates] = useState([]);
-  const {state, setState} = useContext(UserContext)
-
-  useEffect(() => {
-    let body = getTimeframeBody(state.date, state.employee_id);
-
-    findTimeframes(body).then((result) => {
-      setTimeframes(Object.values(result));
-    });
-
-    getAvailableDates(
-      new Date().getTime(),
-      state.employee_id === -1 ? null : state.employee_id
-    ).then((result) => setAvailableDates(Array.from(result)));
-  }, [state.employee_id, state.date, state.timeframe]);
+  const {state, setState} = useReservation()
 
   const saveDate = (date) => {
-    sessionStorage.setItem("date", date);
     setState({...state, date: date});
 };
 
@@ -139,12 +86,9 @@ export const ChooseDate = () => {
           orientation="portrait"
           openTo="day"
           value={availableDates[0]}
-          shouldDisableDate={(date) => {
-            if (availableDates.includes(Date.parse(date))) {
-              return false;
-            } else {
-              return true;
-            }
+          shouldDisableDate={() => {
+            const random  = Math.floor(Math.random() * 2)
+            return Boolean(random)
           }}
           onChange={(date) => saveDate(date)}
           renderInput={(params) => <TextField {...params} />}

@@ -1,12 +1,11 @@
 import React from "react";
 import { Header } from "../../components/Header";
-import { isAuthenticated } from "../../userManagement";
 import { OrderTable } from "../../components/OrderTable.jsx";
 
 
  const OrdersBody = () => {
 
-    return isAuthenticated(
+    return(
         <div>
             <div>
                 <div className="flex flex-row items-center my-3">

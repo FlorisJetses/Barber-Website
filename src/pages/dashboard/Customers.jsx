@@ -1,13 +1,11 @@
 import React from "react";
-
 import { Header } from "../../components/Header";
-import  { isAuthenticated } from "../../userManagement";
 import { CustomerTable } from "../../components/CustomerTable.jsx";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 
  const CustomersBody = () => {
-    return isAuthenticated(
+    return(
         <div className="m-5 flex flex-col">
                 <CustomerTable />
                 <Fab

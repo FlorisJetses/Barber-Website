@@ -104,7 +104,7 @@ export const DayReservation = ({ dateValue }) => {
     };
 
 
-    const handleChangePage = (event, newPage) => {
+    const handleChangePage = ( newPage) => {
         setPage(newPage);
     };
     const handleChangeRowsPerPage = (event) => {

@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-    getEmployees,
-    deleteEmployee,
-    addEmployee,
-} from "../../JanDeKapper.js";
 import { Header } from "../../components/Header";
-import ManageUser, { isAuthenticated } from "../../userManagement";
 import { AddItemCard } from "./ItemCards.jsx";
 import { Tooltip } from "@mui/material";
 import { IconButton } from "@mui/material";
@@ -36,7 +30,6 @@ const getSkillsText = (skills) => {
 };
 
 const getEmployeeElements = (employees) => {
-    const { user } = ManageUser();
 
     return employees.map((employee) => {
         return (
@@ -68,7 +61,6 @@ const getEmployeeElements = (employees) => {
 };
 
 const EmployeesBody = () => {
-    const { user } = ManageUser();
     const [employees, setEmployees] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -89,7 +81,7 @@ const EmployeesBody = () => {
         setPage(0);
     };
 
-    return isAuthenticated(
+    return(
         <div>
             <div className=" m-5 flex flex-col">
                 <div className="bg-white">

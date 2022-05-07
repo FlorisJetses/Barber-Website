@@ -4,30 +4,15 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect } from "react";
 import { CombinedSection } from "./sections/ChooseBarberDate";
 import { FillInformation } from "./sections/FillInformation";
 import { ConfirmReservation } from "./sections/ConfirmReservation";
 import { ChooseTreatment } from "./sections/ChooseTreatment";
-
-
-function parseJson(value) {
-    try {
-        return JSON.parse(value);
-    } catch (e) {
-        return value;
-    }
-}
-
-function getValue(key, def) {
-    let value = parseJson(sessionStorage.getItem(key));
-
-    if (!value) {
-        return def;
-    } else {
-        return value;
-    }
-}
+import {
+    useReservation,
+    ReservationProvider,
+} from "../../store/ReservationContext";
 
 const getTreatmentsText = (treatments) => {
     if (!treatments) return null;
@@ -39,25 +24,10 @@ const getTreatmentsText = (treatments) => {
     return text.substring(0, text.length - 2);
 };
 
-export const UserContext = createContext(null);
-
 export function Steps() {
-    const [expanded, setExpanded] = useState(false);
     const [employees, setEmployees] = useState([]);
-    const [state, setState] = useState({
-        employee_id: getValue("employee_id", 0),
-        date: getValue("date", null),
-        timeframe: getValue("timeframe", null),
-        email: getValue("email", ""),
-        step: getValue("step", 0),
-        treatments: getValue("treatments", []),
-        name: getValue("name", ""),
-        comment: getValue("comment", ""),
-        phoneNumber: getValue("phoneNumber", ""),
-    });
-    const [furthestStep, setFurthestStep] = useState(
-        getValue("fstep", state.step)
-    );
+    const { state, setState } = useReservation();
+    const [furthestStep, setFurthestStep] = useState(state.step);
 
     useEffect(() => {
         if (state.step > furthestStep) {
@@ -74,9 +44,8 @@ export function Steps() {
 
     const dateTime = () => {
         if (state.date && state.timeframe) {
-
             return (
-                getTimeFromMs((state.timeframe).ms) +
+                getTimeFromMs(state.timeframe.ms) +
                 " " +
                 new Date(state.date).toLocaleDateString()
             );
@@ -92,13 +61,6 @@ export function Steps() {
             return employeeName + " " + dateTime();
         }
     }
-
-    const incrementStep = (e) => {
-        e.preventDefault();
-
-        sessionStorage.setItem("step", state.step + 1);
-        setState({ ...state, step: state.step + 1 });
-    };
 
     const steps = [
         {
@@ -117,7 +79,7 @@ export function Steps() {
 
     // Cycle through all the given components or 'steps' and then render them all.
     return (
-        <UserContext.Provider value={{ state, setState, incrementStep }}>
+        <ReservationProvider>
             {steps.map((new_step) => {
                 const StepComponent = new_step.component;
                 const index = steps.indexOf(new_step);
@@ -163,6 +125,6 @@ export function Steps() {
                     </Accordion>
                 );
             })}
-        </UserContext.Provider>
+        </ReservationProvider>
     );
 }

@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ManageUser, { isAuthenticated } from "../../userManagement";
-import { addWorkshift, getEmployees, getWorkshfts } from "../../JanDeKapper.js";
 import { Header } from "../../components/Header";
 import { WorkshiftsTable } from "../../components/WorkshiftsTable";
 import { Button } from "@mui/material";
-import { AddItemCard } from "./ItemCards";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -21,7 +18,6 @@ const getEmployeeOptions = (employees) => {
 };
 
 const WorkshiftsBody = () => {
-    const { user } = ManageUser();
     const [shifts, setShifts] = useState([]);
     const [employees, setEmployees] = useState([]);
 
@@ -42,7 +38,7 @@ const WorkshiftsBody = () => {
         });
     }, [user?.token]);
 
-    return isAuthenticated(
+    return(
         <div className="m-5 flex flex-col">
             <WorkshiftsTable />
             <Fab
