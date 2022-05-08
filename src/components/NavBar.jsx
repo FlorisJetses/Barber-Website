@@ -54,6 +54,9 @@ export const NavBar = () => {
                     <Button href="/#openingstijden">Openingstijden</Button>
                 </ListItem>
                 <ListItem>
+                    <Button href="/dashboard">Dashboard</Button>
+                </ListItem>
+                <ListItem>
                     <Link to="/reservering">
                         <Button variant="contained">Boek nu</Button>
                     </Link>
@@ -80,19 +83,20 @@ export const NavBar = () => {
             </Drawer>
 
             <div>
-                <Link to="/">
-                    <img
-                        src={logo}
-                        alt="Logo"
-                        className="w-32 h-auto m-3 inline "
-                    />
-                </Link>
                 <div className="inline space-x-2">
                     <div className="hidden md:inline space-x-2">
                         <Button href="/#over_ons">Over ons</Button>
 
                         <Button href="/#prijzen">Prijzen</Button>
-
+                    </div>
+                    <Link to="/">
+                        <img
+                            src={logo}
+                            alt="Logo"
+                            className="w-32 h-auto m-3 inline "
+                        />
+                    </Link>
+                    <div className="hidden md:inline space-x-2">
                         <Button href="/#openingstijden">Openingstijden</Button>
                     </div>
 

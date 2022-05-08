@@ -7,12 +7,11 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState, useEffect } from "react";
 import { CombinedSection } from "./sections/ChooseBarberDate";
 import { FillInformation } from "./sections/FillInformation";
-import { ConfirmReservation } from "./sections/ConfirmReservation";
 import { ChooseTreatment } from "./sections/ChooseTreatment";
 import {
     useReservation,
-    ReservationProvider,
 } from "../../store/ReservationContext";
+import { employees } from "../../employees";
 
 const getTreatmentsText = (treatments) => {
     if (!treatments) return null;
@@ -25,7 +24,6 @@ const getTreatmentsText = (treatments) => {
 };
 
 export function Steps() {
-    const [employees, setEmployees] = useState([]);
     const { state, setState } = useReservation();
     const [furthestStep, setFurthestStep] = useState(state.step);
 
@@ -74,12 +72,11 @@ export function Steps() {
             description: combined(),
         },
         { component: FillInformation, title: "Gegevens" },
-        { component: ConfirmReservation, title: "Bevestiging" },
     ];
 
     // Cycle through all the given components or 'steps' and then render them all.
     return (
-        <ReservationProvider>
+        <>
             {steps.map((new_step) => {
                 const StepComponent = new_step.component;
                 const index = steps.indexOf(new_step);
@@ -125,6 +122,6 @@ export function Steps() {
                     </Accordion>
                 );
             })}
-        </ReservationProvider>
+        </>
     );
 }

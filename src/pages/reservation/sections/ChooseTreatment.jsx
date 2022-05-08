@@ -14,7 +14,6 @@ function getTreatmentElements() {
             let newTreats = treats.filter((option) => {
                 return option !== treatment
             })
-            sessionStorage.setItem("treatments", JSON.stringify(newTreats));
             setState({ ...state, treatments: newTreats });
             
         }
@@ -26,13 +25,11 @@ function getTreatmentElements() {
         if (treats.length !== 0) {
             if (!treats.includes(treatment)) {
                 treats.push(treatment);
-                sessionStorage.setItem("treatments", JSON.stringify(treats));
                 setState({ ...state, treatments: treats,  });
                 
             }
         } else {
             treats = [treatment];
-            sessionStorage.setItem("treatments", JSON.stringify(treats));
             setState({ ...state, treatments: treats });       
         }
     };
@@ -61,7 +58,7 @@ function getTreatmentElements() {
                     htmlFor={"treatment_" + treatment.title}
                     className="cursor-pointer"
                 >
-                    {treatment.title} €{treatment.price}
+                    {treatment.title}
                 </label>
             </div>
         );

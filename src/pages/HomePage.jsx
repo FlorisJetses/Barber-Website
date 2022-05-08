@@ -16,22 +16,11 @@ import Barber1 from "../img/Barber1.jpg"
 import Barber2 from "../img/Barber2.jpg"
 import Barber3 from "../img/Barber3.jpg"
 import { treatments } from "../treatments.js";
+import { employees } from "../employees.js";
 
 
 export function HomePage() {
 
-    const [employees, setEmployees] = useState([]);
-
-    useEffect(() => {
-        getEmployees().then((employees) => {
-            let emplyMap = {};
-
-            for (let employee of employees)
-                emplyMap[employee.employee_id] = employee;
-
-            setEmployees(emplyMap);
-        });
-    }, []);
 
     return (
         <div
@@ -116,7 +105,7 @@ export function HomePage() {
                     <ul className="bg-white">
                         {treatments.map((treatment) => {
                             return (
-                                <li className="text-lg" key={treatment.title}>€{(treatment.price).includes(".") ? treatment.price : treatment.price + ",-"}    {treatment.title}</li>
+                                <li className="text-lg" key={treatment.title}>€{treatment.price + ",-"}    {treatment.title}</li>
                             );
                         })}
                     </ul>

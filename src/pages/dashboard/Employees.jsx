@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
-import { AddItemCard } from "./ItemCards.jsx";
 import { Tooltip } from "@mui/material";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -67,11 +66,6 @@ const EmployeesBody = () => {
     const [order, setOrder] = useState("asc");
     const [orderBy, setOrderBy] = useState("");
 
-    useEffect(() => {
-        getEmployees().then((employees) => {
-            if (employees) setEmployees(Array.from(employees));
-        });
-    }, [user?.token]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -139,21 +133,6 @@ const EmployeesBody = () => {
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />
                 </div>
-                <Fab
-                sx={{alignSelf: "flex-end", marginTop: 3}}
-                color="primary"
-                aria-label="add"
-                onClick={() => AddItemCard(
-                    [
-                        ["Voornaam", "first_name", "text"],
-                        ["Achternaam", "last_name", "text"]
-                    ],
-                    addEmployee,
-                    user
-                )}
-            >
-                <AddIcon />
-            </Fab>
             </div>
         </div>
     );

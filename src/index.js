@@ -9,10 +9,6 @@ import { Workshifts } from './pages/dashboard/Workshifts';
 import { Customers } from './pages/dashboard/Customers';
 import { HomePage } from './pages/HomePage';
 import { Reservation } from './pages/reservation/Reservation';
-import { Settings} from './pages/dashboard/Settings'
-import { Editor } from './pages/dashboard/Editor'
-import { Products } from './pages/dashboard/Products';
-import { Transactions } from './pages/dashboard/Transactions';
 
 function Page() {
     return (
@@ -28,10 +24,6 @@ function Page() {
                     <Route path="/dashboard/medewerkers" element={<Employees />} />
                     <Route path="/dashboard/roosters" element={<Workshifts />} />
                     <Route path="/dashboard/klanten" element={<Customers />} />
-                    <Route path="/dashboard/instellingen" element={<Settings /> } />
-                    <Route path="/dashboard/editor" element={<Editor />} />
-                    <Route path="/dashboard/producten" element={<Products />} />
-                    <Route path="/dashboard/transacties" element={<Transactions />} />
                 </Routes>
             </Router>
         </div>

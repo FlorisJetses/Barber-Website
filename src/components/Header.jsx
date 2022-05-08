@@ -128,10 +128,6 @@ export function Header(props) {
               {props.title}
             </Typography>
             <div>
-              <IconButton color="inherit">
-                <a href="/Handleiding Dashboard.pdf" target="_blank"><HelpIcon/></a>
-                
-              </IconButton>
               <IconButton color="inherit" onClick={handleClick} >
                 <Avatar></Avatar>
               </IconButton>
