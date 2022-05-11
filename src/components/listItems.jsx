@@ -61,21 +61,7 @@ export const mainListItems = (
           </ListItem>
         </Link>
 
-        <Link to="/dashboard/transacties">
-        <ListItemButton >
-              <ListItemIcon>
-                  <PointOfSaleIcon />
-              </ListItemIcon>
-              <ListItemText primary="Transacties" />
-          </ListItemButton>
-        </Link>
-        <Link to="/dashboard/producten">
-            <ListItemButton >
-                <ListItemIcon>
-                    <Inventory2Icon />
-                </ListItemIcon>
-                <ListItemText primary="Producten" />
-            </ListItemButton>
-        </Link>
+
+
     </div>
 );

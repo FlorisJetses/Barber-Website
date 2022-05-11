@@ -29,7 +29,7 @@ export function HomePage() {
         >
             <NavBar />
 
-            <div className=" flex md:flex-row flex-col h-screen justify-center items-center md:-mt-16">
+            <div className=" flex md:flex-row flex-col md:h-screen justify-center items-center md:-mt-16">
                 <div className="flex flex-col items-center md:items-baseline mb-8 md:ml-10 lg:ml-16 xl:ml-224">
                     <h1 className="text-5xl m-3 mb-8 font-semibold text-orange-500 bg-white">
                         Jan de Kapper
@@ -93,22 +93,37 @@ export function HomePage() {
 
                 <div className="mb-10 flex flex-col items-center">
                     <h1 className="text-3xl m-3" id="prijzen">Prijzen</h1>
-                    <div className="flex flex-row items-center">
+                    <div className="flex flex-row items-center ">
                         <div className="line mr-2"></div>
                         <img
                             src={scissor}
-                            alt=""
+                            alt="Schaar"
                             className="scissor"
                         />
                         <div className="line ml-2"></div>
                     </div>
-                    <ul className="bg-white">
-                        {treatments.map((treatment) => {
-                            return (
-                                <li className="text-lg" key={treatment.title}>€{treatment.price + ",-"}    {treatment.title}</li>
-                            );
-                        })}
-                    </ul>
+                    <div className="flex md:flex-row flex-col md:space-x-5 space-y-8 md:space-y-0">
+                        <div>
+                            <p className="text-xl my-2">Knipbehandelingen:</p>
+                            <ul className="bg-white">
+                                {treatments.cuttingTreatments.map((treatment) => {
+                                    return (
+                                        <li className="text-lg" key={treatment.title}> {treatment.title} €{treatment.price + ",-"} </li>
+                                    );
+                                })}
+                            </ul>
+                        </div>
+                        <div>
+                            <p className="text-xl my-2">Styling:</p>
+                            <ul className="bg-white">
+                                {treatments.stylingTreatments.map((treatment) => {
+                                    return (
+                                        <li className="text-lg" key={treatment.title}>{treatment.title} €{ treatment.price + ",-"}  </li>
+                                    );
+                                })}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <h1 className="text-3xl my-3 " id="medewerkers">Medewerkers</h1>
                 <div className="flex flex-row items-center mb-8">
@@ -122,13 +137,14 @@ export function HomePage() {
                 </div>
                 <div className="flex flex-col md:flex-row flex-wrap gap-4 justify-center">
                  {Object.values(employees).slice(0, 3).map((employee) => {
+                     
                      return(
                             <Card sx={{ maxWidth: 300}} key={employee.employee_id}>
                                 <CardMedia>
                                     <CardMedia
                                         component="img"
                                         height="300"
-                                        image={employee.employee_id === 1 ? Barber1 : employee.employee_id === 2 ? Barber2 : Barber3}
+                                        image={Barber1}
                                         alt="Kapper"
                                     />
                                     <CardContent>
