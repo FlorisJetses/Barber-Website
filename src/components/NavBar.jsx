@@ -85,9 +85,8 @@ export const NavBar = () => {
             <div>
                 <div className="inline space-x-2">
                     <div className="hidden md:inline space-x-2">
-                        <Button href="/#over_ons">Over ons</Button>
-
                         <Button href="/#prijzen">Prijzen</Button>
+                        <Button href="/#openingstijden">Openingstijden</Button>
                     </div>
                     <Link to="/">
                         <img
@@ -97,7 +96,10 @@ export const NavBar = () => {
                         />
                     </Link>
                     <div className="hidden md:inline space-x-2">
-                        <Button href="/#openingstijden">Openingstijden</Button>
+
+                        <Link to="dashboard">
+                            <Button>Dashboard</Button>
+                        </Link>
                     </div>
 
                     <Link to="/reservering">

@@ -21,7 +21,7 @@ export const CombinedSection = () => {
             </div>
             <div className="text-red-500 my-3">{required && "Selecteer een kapper & een tijd"}</div>
             <Button variant="contained" onClick={(e) => {
-                if(state.date && state.timeframe)
+                if(state.date && state.timeframe && state.employee)
                 {incrementStep(e)
                     setRequired(false)
                 } else {

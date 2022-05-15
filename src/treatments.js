@@ -12,7 +12,7 @@ const cuttingTreatments= [
         price: 31
     },{
         title: "Rand knippen ",
-        price: 16.40
+        price: 16
     },
     {
         title: "Baard Trimmen",
@@ -24,19 +24,19 @@ const cuttingTreatments= [
 const stylingTreatments = [
     {
         title: "Wassen",
-        price: 5.60
+        price: 5
     },
     {
         title: "Drogen",
-        price: 6.40
+        price: 6
     },
     {
         title: "Model drogen",
-        price: 15.25
+        price: 15
     },
     {
         title: "Föhnen Deluxe",
-        price: 19.85
+        price: 19
     },
     {
         title: "Verven",

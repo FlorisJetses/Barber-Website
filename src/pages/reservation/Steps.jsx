@@ -11,7 +11,6 @@ import { ChooseTreatment } from "./sections/ChooseTreatment";
 import {
     useReservation,
 } from "../../store/ReservationContext";
-import { employees } from "../../employees";
 
 const getTreatmentsText = (treatments) => {
     if (!treatments) return null;
@@ -50,15 +49,7 @@ export function Steps() {
         }
     };
 
-    let employee =
-        state.employee_id in employees ? employees[state.employee_id] : null;
-    let employeeName = employee ? employee.first_name + "," : "Geen voorkeur,";
-
-    function combined() {
-        if (state.employee_id && state.timeframe) {
-            return employeeName + " " + dateTime();
-        }
-    }
+    
 
     const steps = [
         {
@@ -69,7 +60,7 @@ export function Steps() {
         {
             component: CombinedSection,
             title: "Kapper & Datum",
-            description: combined(),
+            description: `${state.employee + ","} ${state.timeframe} ${state.date && new Date(state?.date).toLocaleDateString()}`,
         },
         { component: FillInformation, title: "Gegevens" },
     ];

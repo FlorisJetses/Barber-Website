@@ -8,25 +8,28 @@ import { Reservations } from './pages/dashboard/Reservations';
 import { Workshifts } from './pages/dashboard/Workshifts';
 import { Customers } from './pages/dashboard/Customers';
 import { HomePage } from './pages/HomePage';
-import { Reservation } from './pages/reservation/Reservation';
+import { Reservation } from './pages/Reservation';
+import { ReservationProvider } from './store/ReservationContext';
+import { ConfirmReservation } from './pages/confirmReservation';
 
 function Page() {
     return (
-        <div className="h-full overflow-x-hidden">
-            <div id="card-holder" className="fixed top-5 left-5 z-holder"></div>
-            <div id="message-holder" className="fixed bottom-0 z-holder"></div>
-            <Router>
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/reservering" element={<Reservation />} />
-                    <Route path="/dashboard/reserveringen" element={<Reservations />} />
-                    <Route path="/dashboard/medewerkers" element={<Employees />} />
-                    <Route path="/dashboard/roosters" element={<Workshifts />} />
-                    <Route path="/dashboard/klanten" element={<Customers />} />
-                </Routes>
-            </Router>
-        </div>
+        <ReservationProvider>
+            <div className="h-full overflow-x-hidden">
+                <Router>
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/dashboard" element={<Dashboard />} />
+                        <Route path="/reservering" element={<Reservation />} />
+                        <Route path="/dashboard/reserveringen" element={<Reservations />} />
+                        <Route path="/dashboard/medewerkers" element={<Employees />} />
+                        <Route path="/dashboard/roosters" element={<Workshifts />} />
+                        <Route path="/dashboard/klanten" element={<Customers />} />
+                        <Route path='/bevestig_reservering' element={<ConfirmReservation />}/>
+                    </Routes>
+                </Router>
+            </div>
+        </ReservationProvider>
     )
 }
 

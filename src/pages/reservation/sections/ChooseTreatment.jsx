@@ -4,65 +4,91 @@ import { Button } from "@mui/material";
 import {useReservation} from "../../../store/ReservationContext"
 import { treatments } from "../../../treatments";
 
-function getTreatmentElements() {
+function TreatmentElements () {
     const { state, setState } = useReservation();
 
     const removeTreatment = (treatment) => {
-        let treats = state.treatments;
-
-        if (treats) {
-            let newTreats = treats.filter((option) => {
+            let filterTreatments = state.treatments.filter((option) => {
                 return option !== treatment
             })
-            setState({ ...state, treatments: newTreats });
-            
-        }
+            setState({ ...state, treatments: filterTreatments });
+        
     };
 
     const addTreatment = (treatment) => {
-        let treats = state.treatments;
-
-        if (treats.length !== 0) {
-            if (!treats.includes(treatment)) {
-                treats.push(treatment);
-                setState({ ...state, treatments: treats,  });
-                
-            }
-        } else {
-            treats = [treatment];
-            setState({ ...state, treatments: treats });       
+        if (!state.treatments.includes(treatment)) {
+            setState({...state, treatments: [...state.treatments, treatment]})
         }
     };
 
-    return treatments.map((treatment) => {
-        return (
-            <div key={treatment.title} className="cursor-pointer">
-                <Checkbox
-                    id={"treatment_" + treatment.title}
-                    value={treatment.title}
-                    onClick={(e) => {
-                        if (
-                            state.treatments &&
-                            e.target.checked &&
-                            !state.treatments.includes(e.target.value)
-                        ) {
-                            addTreatment(e.target.value);
-                        } else if (!e.target.checked) {
-                            removeTreatment(e.target.value);
-                        }
-                    }}
-                    checked={state.treatments.includes(treatment.title)}
-                />
-
-                <label
-                    htmlFor={"treatment_" + treatment.title}
-                    className="cursor-pointer"
-                >
-                    {treatment.title}
-                </label>
+    return(
+        <div className="flex sm:flex-row flex-col space-y-5 sm:space-y-0 sm:space-x-5">
+            <div>
+                <p>Knipbehandelingen:</p>
+                {treatments.cuttingTreatments.map((treatment) => {
+                    return (
+                        <div key={treatment.title} className="cursor-pointer">
+                            <Checkbox
+                                id={"treatment_" + treatment.title}
+                                value={treatment.title}
+                                onClick={(e) => {
+                                    if (
+                                        state.treatments &&
+                                        e.target.checked &&
+                                        !state.treatments.includes(e.target.value)
+                                    ) {
+                                        addTreatment(e.target.value);
+                                    } else if (!e.target.checked) {
+                                        removeTreatment(e.target.value);
+                                    }
+                                }}
+                                checked={state.treatments.includes(treatment.title)}
+                            />
+                
+                            <label
+                                htmlFor={"treatment_" + treatment.title}
+                                className="cursor-pointer"
+                            >
+                                {treatment.title}
+                            </label>
+                        </div>
+                    );
+                })}
             </div>
-        );
-    });
+            <div>
+                <p>Styling:</p>
+                {treatments.stylingTreatments.map((treatment) => {
+                    return (
+                        <div key={treatment.title} className="cursor-pointer">
+                            <Checkbox
+                                id={"treatment_" + treatment.title}
+                                value={treatment.title}
+                                onClick={(e) => {
+                                    if (
+                                        state.treatments &&
+                                        e.target.checked &&
+                                        !state.treatments.includes(e.target.value)
+                                    ) {
+                                        addTreatment(e.target.value);
+                                    } else if (!e.target.checked) {
+                                        removeTreatment(e.target.value);
+                                    }
+                                }}
+                                checked={state.treatments.includes(treatment.title)}
+                            />
+                
+                            <label
+                                htmlFor={"treatment_" + treatment.title}
+                                className="cursor-pointer"
+                            >
+                                {treatment.title}
+                            </label>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    )
 }
 
 export const ChooseTreatment = () => {
@@ -82,7 +108,7 @@ export const ChooseTreatment = () => {
 
     return (
         <form onSubmit={handleSubmit} className=" flex flex-col items-center">
-            <div>
+            <div className="mb-8">
                 <p>Kies uw behandeling:</p>
                 <br />
                 {required && (
@@ -90,7 +116,7 @@ export const ChooseTreatment = () => {
                         Kies minimaal één behandeling
                     </p>
                 )}
-                <div className="my-3">{getTreatmentElements()}</div>
+                <TreatmentElements />
             </div>
             <div>
                 <Button

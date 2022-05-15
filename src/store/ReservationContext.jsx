@@ -4,9 +4,9 @@ const ReservationContext = createContext();
 
 const ReservationProvider = ({children}) => {
     const [state, setState] = useState({
-        employee_id: 0,
-        date: null,
-        timeframe:  null,
+        employee: "",
+        date: "",
+        timeframe:  "",
         email: "",
         step: 0,
         treatments: [],

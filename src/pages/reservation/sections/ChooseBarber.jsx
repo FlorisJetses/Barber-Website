@@ -11,8 +11,8 @@ import {employees} from "../../../employees"
 export const ChooseBarber = () => {
   const { state, setState } = useReservation();
 
-  const saveEmployeeId = (employee_id) => {
-    setState({ ...state, employee_id: employee_id });
+  const saveEmployeeId = (name) => {
+    setState({ ...state, employee: name });
 };
 
     return (
@@ -29,20 +29,24 @@ export const ChooseBarber = () => {
                     {employees.map((employee) => {
                         return (
                             <ListItem
-                                key={employee.employee_id}
+                                key={employee.firstName}
                                 onClick={() => {
-                                    saveEmployeeId(employee.employee_id);
+                                    saveEmployeeId(employee.firstName);
                                 }}
                             >
-                                <ListItemButton>
+                                <ListItemButton
+                                sx={{borderRadius: 3, marginY: 1.2}}
+                                selected={state.employee === employee.firstName}
+                                >
                                     <ListItemAvatar sx={{ marginRight: 2 }}>
                                         <Avatar
                                             sx={{ width: 56, height: 56 }}
                                             alt="medewerker"
+                                            src={employee.img}
                                         />
                                     </ListItemAvatar>
                                     <ListItemText
-                                        primary={employee.first_name}
+                                        primary={employee.firstName}
                                     />
                                 </ListItemButton>
                             </ListItem>
@@ -51,7 +55,7 @@ export const ChooseBarber = () => {
                     <ListItem>
                         <Button
                             onClick={() => {
-                                saveEmployeeId(-1);
+                                saveEmployeeId("Geen voorkeur");
                             }}
                             className="cursor-pointer"
                             variant="outlined"

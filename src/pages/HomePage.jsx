@@ -20,8 +20,6 @@ import { employees } from "../employees.js";
 
 
 export function HomePage() {
-
-
     return (
         <div
             style={{ backgroundImage: `url(${scissors})` }}
@@ -102,10 +100,10 @@ export function HomePage() {
                         />
                         <div className="line ml-2"></div>
                     </div>
-                    <div className="flex md:flex-row flex-col md:space-x-5 space-y-8 md:space-y-0">
+                    <div className="flex md:flex-row flex-col md:space-x-5 space-y-8 md:space-y-0 bg-white">
                         <div>
                             <p className="text-xl my-2">Knipbehandelingen:</p>
-                            <ul className="bg-white">
+                            <ul >
                                 {treatments.cuttingTreatments.map((treatment) => {
                                     return (
                                         <li className="text-lg" key={treatment.title}> {treatment.title} €{treatment.price + ",-"} </li>
@@ -115,10 +113,10 @@ export function HomePage() {
                         </div>
                         <div>
                             <p className="text-xl my-2">Styling:</p>
-                            <ul className="bg-white">
+                            <ul >
                                 {treatments.stylingTreatments.map((treatment) => {
                                     return (
-                                        <li className="text-lg" key={treatment.title}>{treatment.title} €{ treatment.price + ",-"}  </li>
+                                        <li className="text-lg" key={treatment.title}>{treatment.title}: €{ treatment.price + ",-"}  </li>
                                     );
                                 })}
                             </ul>
@@ -136,15 +134,15 @@ export function HomePage() {
                     <div className="line ml-2"></div>
                 </div>
                 <div className="flex flex-col md:flex-row flex-wrap gap-4 justify-center">
-                 {Object.values(employees).slice(0, 3).map((employee) => {
+                 {employees.map((employee) => {
                      
                      return(
-                            <Card sx={{ maxWidth: 300}} key={employee.employee_id}>
+                            <Card sx={{ maxWidth: 300}} key={employee.firstName}>
                                 <CardMedia>
                                     <CardMedia
                                         component="img"
                                         height="300"
-                                        image={Barber1}
+                                        image={employee.img}
                                         alt="Kapper"
                                     />
                                     <CardContent>
@@ -153,7 +151,7 @@ export function HomePage() {
                                             variant="h5"
                                             component="div"
                                         >
-                                            {employee.first_name}
+                                            {employee.firstName}
                                         </Typography>
                                     </CardContent>
                                 </CardMedia>
