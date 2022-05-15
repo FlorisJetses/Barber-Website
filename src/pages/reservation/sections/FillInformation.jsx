@@ -18,7 +18,8 @@ export const FillInformation = () => {
         const emailValid = validateEmail();
 
         if (state.name && emailValid) {
-            navigate("/confirm_reservation")
+            navigate("/bevestig_reservering")
+            setState({...state, done: true})
         }
     };
 
