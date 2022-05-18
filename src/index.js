@@ -5,11 +5,11 @@ import './index.css';
 import { Dashboard } from './pages/dashboard/Dashboard'
 import { Employees } from './pages/dashboard/Employees';
 import { Reservations } from './pages/dashboard/Reservations';
-import { Workshifts } from './pages/dashboard/Workshifts';
 import { HomePage } from './pages/HomePage';
 import { Reservation } from './pages/Reservation';
 import { ReservationProvider } from './store/ReservationContext';
 import { ConfirmReservation } from './pages/confirmReservation';
+import { Customers } from './pages/dashboard/Customers';
 
 function Page() {
     return (
@@ -22,7 +22,7 @@ function Page() {
                         <Route path="/reservering" element={<Reservation />} />
                         <Route path="/dashboard/reserveringen" element={<Reservations />} />
                         <Route path="/dashboard/medewerkers" element={<Employees />} />
-                        <Route path="/dashboard/roosters" element={<Workshifts />} />
+                        <Route path="/dashboard/klanten" element={<Customers />} />
                         <Route path='/bevestig_reservering' element={<ConfirmReservation />}/>
                     </Routes>
                 </Router>

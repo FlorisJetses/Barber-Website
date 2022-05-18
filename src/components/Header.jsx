@@ -16,10 +16,9 @@ import { Avatar } from "@mui/material";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import HelpIcon from '@mui/icons-material/Help';
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -127,6 +126,10 @@ export function Header(props) {
             >
               {props.title}
             </Typography>
+            <Link to="/">
+            <Button variant="contained">Terug</Button>
+            </Link>
+            
             <div>
               <IconButton color="inherit" onClick={handleClick} >
                 <Avatar></Avatar>
@@ -172,6 +175,14 @@ export function Header(props) {
                 </ListItemIcon>
                 Uitloggen
               </MenuItem>
+              <Link to="/">
+                <MenuItem >
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  Terug naar de site
+                </MenuItem>
+              </Link>
             </Menu>
           </Toolbar>
         </AppBar>

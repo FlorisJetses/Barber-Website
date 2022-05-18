@@ -17,8 +17,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Tooltip from "@mui/material/Tooltip";
 import { useReservation } from "../store/ReservationContext";
 import {db} from "../firebase"
-import { getDocs, collection, where, doc, getDoc, query } from "firebase/firestore";
-import employees from ""
+import { getDocs, collection } from "firebase/firestore";
+import {employees} from ".././employees"
 
 function Row({ reservation }) {
   const [open, setOpen] = useState(false);
@@ -42,7 +42,7 @@ function Row({ reservation }) {
           {reservation.email}
         </TableCell>
 
-        <TableCell></TableCell>
+        <TableCell>{employees[Math.floor(Math.random() * 3)].firstName}</TableCell>
 
         <TableCell>
           {reservation.time + " " + reservation.date}
@@ -163,22 +163,10 @@ export const ReservationTable =  () => {
       let reservationArray = []
     const getReservationsDocs = await getDocs(collection(db, "reservations"))
   getReservationsDocs.forEach((doc) => {
-    console.log(doc.id, " => ", doc.data());
       reservationArray.push({...doc.data(), id: doc.id})
   })
   setReservations(reservationArray)
   }, [])
-
-// useEffect(async () => {
-//     const q = query(collection(db, "reservations"), where("date", "==", "4/7/2022"));
-
-// const querySnapshot = await getDocs(q);
-// querySnapshot.forEach((doc) => {
-//     console.log(doc.id, " => ", doc.data());
-
-//  setReservations([{...doc.data(), id: doc.id}])
-// })
-// },[])
 
   return (
     <div className="bg-white">
