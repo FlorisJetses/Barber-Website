@@ -12,9 +12,6 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import scissor from "../img/scissor.svg";
 import scissors from "../img/scissors.svg";
-import Barber1 from "../img/Barber1.jpg"
-import Barber2 from "../img/Barber2.jpg"
-import Barber3 from "../img/Barber3.jpg"
 import { treatments } from "../treatments.js";
 import { employees } from "../employees.js";
 

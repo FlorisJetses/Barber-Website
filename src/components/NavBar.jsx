@@ -97,7 +97,7 @@ export const NavBar = () => {
                     </Link>
                     <div className="hidden md:inline space-x-2">
 
-                        <Link to="dashboard">
+                        <Link to="/dashboard">
                             <Button>Dashboard</Button>
                         </Link>
                     </div>
