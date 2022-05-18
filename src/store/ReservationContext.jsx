@@ -2,19 +2,34 @@ import { useState, createContext, useContext } from "react";
 
 const ReservationContext = createContext();
 
+const reservation = {
+    employee: "",
+    date: "",
+    timeframe:  "",
+    email: "",
+    step: 0,
+    treatments: [],
+    name: "",
+    comment:  "",
+    phoneNumber:  "",
+    done: false
+}
+
+const test = {
+    employee: "John",
+    date: "",
+    timeframe:  "09:00",
+    email: "florisjoepie@gmail.com",
+    step: 0,
+    treatments: ["Wassen en knippen"],
+    name: "Floris",
+    comment:  "",
+    phoneNumber:  "",
+    done: true
+}
+
 const ReservationProvider = ({children}) => {
-    const [state, setState] = useState({
-        employee: "",
-        date: "",
-        timeframe:  "",
-        email: "",
-        step: 0,
-        treatments: [],
-        name: "",
-        comment:  "",
-        phoneNumber:  "",
-        done: false
-    });
+    const [state, setState] = useState(test);
 
     const incrementStep = (e) => {
         e.preventDefault();
