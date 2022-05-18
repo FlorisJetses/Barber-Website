@@ -13,54 +13,11 @@ import TableRow from "@mui/material/TableRow";
 import { stableSort, getComparator } from "../../components/TableFunctions.jsx";
 import { TablePagination } from "@mui/material";
 import { Typography } from "@mui/material";
-import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
+import { employees } from "../../employees";
 
-const getSkillsText = (skills) => {
-    let text = "";
-
-    if (typeof skills == Array) {
-        for (let skill of skills) text += skill + ", ";
-
-        return text.substring(0, text.length - 2);
-    } else {
-        return "-";
-    }
-};
-
-const getEmployeeElements = (employees) => {
-
-    return employees.map((employee) => {
-        return (
-            <tr key={employee.employee_id}>
-                <td>
-                    <Avatar></Avatar>
-                </td>
-                <td>{employee.first_name}</td>
-                <td>{employee.last_name}</td>
-                <td>{getSkillsText(employee.skills)}</td>
-                <td>
-                    <Tooltip
-                        title="Delete"
-                        onClick={() => {
-                            deleteEmployee(
-                                { id: employee.employee_id },
-                                user.token
-                            );
-                        }}
-                    >
-                        <IconButton>
-                            <DeleteIcon />
-                        </IconButton>
-                    </Tooltip>
-                </td>
-            </tr>
-        );
-    });
-};
 
 const EmployeesBody = () => {
-    const [employees, setEmployees] = useState([]);
+
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [order, setOrder] = useState("asc");
@@ -105,17 +62,17 @@ const EmployeesBody = () => {
                                         page * rowsPerPage,
                                         page * rowsPerPage + rowsPerPage
                                     )
-                                    .map((employee) => {
+                                    .map((employee, index) => {
                                         return (
-                                            <TableRow>
+                                            <TableRow key={index}>
                                                 <TableCell>
-                                                    <Avatar />
+                                                    <Avatar src={employee.img}/>
                                                 </TableCell>
                                                 <TableCell>
-                                                    {employee.first_name}
+                                                    {employee.firstName}
                                                 </TableCell>
                                                 <TableCell>
-                                                    {employee.last_name}
+                                                    {employee.lastName}
                                                 </TableCell>
                                             </TableRow>
                                         );

@@ -13,6 +13,7 @@ const ReservationProvider = ({children}) => {
         name: "",
         comment:  "",
         phoneNumber:  "",
+        done: false
     });
 
     const incrementStep = (e) => {

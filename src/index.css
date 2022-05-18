@@ -6,6 +6,7 @@
     html, body {
         overflow-x: hidden;
         scroll-behavior: smooth;
+        height: 100%
     }
     .bar1,
     .bar2,
